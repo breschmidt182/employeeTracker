@@ -6,12 +6,16 @@ const mainMenu = [
         name:'mainMenu'
     },
 ]
-const questions = [
+
+const departmentQuestions = [
     {
         type:'input',
         message:'What is the name of the department you want to add?',
         name:'addDep'
-    },
+    }
+]
+
+const roleQuestions = [
     {
         type:'input',
         message:'What is the name of the role you would like to add?',
@@ -24,9 +28,12 @@ const questions = [
     },
     {
         type:'input',
-        message:'What department will this role be a part of?',
+        message:'What department will this role be a part of? Must have department id.',
         name:'addRoleDep'
-    },
+    }
+]
+
+const employeeQuestions = [
     {
         type:'input',
         message:'What is the FIRST name of the employee you would like to add?',
@@ -46,7 +53,10 @@ const questions = [
         type:'input',
         message:'Who will the manager be for this employee?',
         name:'newEmployeeManager'
-    },
+    }
+]
+
+const updateEmployee = [
     {
         type:'input',
         message:'Which employee would you like to update?',
@@ -54,4 +64,4 @@ const questions = [
     }
 ]
 
-module.exports = {mainMenu, questions}
+module.exports = {mainMenu, departmentQuestions, roleQuestions, employeeQuestions}
