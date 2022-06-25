@@ -1,13 +1,12 @@
-const questions = require('./questions');
-const db = require('./config/connection');
+const {mainMenu, questions} = require('./questions');
 const consoleTable = require('console.table');
 const inquirer = require('inquirer');
+const db = require('./config/connection');
 
 function allChoices() {
     inquirer.prompt(mainMenu)
     .then(answers => {
         console.log(answers)
-        let choice = ''
         switch(answers.mainMenu) {
             case 'View all departments':
                 viewAllDep()
@@ -36,7 +35,11 @@ function allChoices() {
 
 }
 
-function viewAllDep() {}
+function viewAllDep() {
+    db.query('SELECT * FROM department', function (err, results) {
+        console.log(results);
+      });
+}
 
 function viewAllRoles() {}
 
@@ -61,3 +64,5 @@ function newEmployeeManager() {}
 function addEmployee() {}
 
 function updateEmployee() {}
+
+allChoices()
