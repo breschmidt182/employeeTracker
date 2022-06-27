@@ -26,7 +26,7 @@ function allChoices() {
             case 'Add an employee':
                 addEmployee()
             break;
-            case 'Update an employee role':
+            case 'Update an employee':
                 updateEmployee()
             break;
             case 'Exit':
@@ -58,6 +58,7 @@ function viewAllEmployees() {
     db.query('SELECT * FROM employee', function (err, results) {
         console.log('\n');
         console.table(results);
+        console.log(results);
       });
     allChoices()
 }
@@ -90,22 +91,46 @@ function addEmployee() {
     inquirer.prompt(employeeQuestions)
     .then(answers => {
         console.log(answers)
-        db.query(`INSERT INTO role(first_name, last_name, new_employee_role, new_employee_manager) VALUES ('${answers.firstName}', ${answers.lastName}',${answers.newEmployeeRole},${answers.newEmployeeManager})`, function (err, results){
+        db.query(`INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES ('${answers.first_name}', '${answers.last_name}',${answers.newEmployeeRole},${answers.newEmployeeManager})`, function (err, results){
             console.log(`\n`);
-            console.log(`${answers.firstName} ${answers.lastName} added to list of employees`)
+            console.log(err);
+            console.log(`${answers.first_name} ${answers.last_name} added to list of employees`)
         })
+        allChoices()
     })
 }
 
 function updateEmployee() {
-    inquirer.prompt(updateEmployee)
-    .then(answers => {
-        console.log(answers)
-        db.query(`UPDATE employee SET(first_name, last_name, employee_id, manager_id) WHERE`, function (err, results){
-            console.log(`\n`);
-            console.log(`${answers.firstName} ${answers.lastName} added to list of employees`)
-        })
-    })
+    var employees 
+    db.query('SELECT * FROM employee', function (err, results) {
+        console.log('\n');
+        console.log(err);
+        console.table(results);
+        employees = results;
+        const promptChoices = []
+        for(let i = 0; i < employees.length; i++) {
+          console.log(employees[i].first_name)
+          promptChoices.push(employees[i].first_name)
+        }
+        console.log(promptChoices)
+        const updateEmployeePrompt= [
+          {
+              type:'list',
+              message:'Which employee would you like to update?',
+              choices: promptChoices,
+              name:'updateEmployeePrompt'
+          }
+          
+        ]
+      inquirer.prompt(updateEmployeePrompt)
+      .then(answers => {
+          console.log(answers)
+          db.query(`UPDATE employee SET(employee_id WHERE ('first_name= ${answers.first_name}')`, function (err, results){
+              console.log(`\n`);
+              console.log(`${answers.first_name} ${answers.last_name} added to list of employees`)
+          })
+      })
+      });
 }
 //UPDATE employee SET WHERE
 

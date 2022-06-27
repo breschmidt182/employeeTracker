@@ -2,7 +2,7 @@ const mainMenu = [
     {
         type: 'list',
         message: 'What would you like to do?',
-        choices: ['View all departments','View all roles','View all employees','Add a department','Add a role','Add an employee','Update an employee role'],
+        choices: ['View all departments','View all roles','View all employees','Add a department','Add a role','Add an employee','Update an employee'],
         name:'mainMenu'
     },
 ]
@@ -37,12 +37,12 @@ const employeeQuestions = [
     {
         type:'input',
         message:'What is the FIRST name of the employee you would like to add?',
-        name:'firstName'
+        name:'first_name'
     },
     {
         type:'input',
         message:'What is the LAST name of the employee you would like to add?',
-        name:'lastName'
+        name:'last_name'
     },
     {
         type:'input',
@@ -56,12 +56,6 @@ const employeeQuestions = [
     }
 ]
 
-const updateEmployee = [
-    {
-        type:'input',
-        message:'Which employee would you like to update?',
-        name:'updateEmployee'
-    }
-]
+
 
 module.exports = {mainMenu, departmentQuestions, roleQuestions, employeeQuestions}
